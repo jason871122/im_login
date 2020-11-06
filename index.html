@@ -7,14 +7,48 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.1.1">
-    <title>Signin Template · Bootstrap</title>
+    <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <title>login</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
 </head>
+<script>
+    function initializeApp(data){
+        var userid = data.context.userId; //取得ID
+    }
+    function pushMsg(uid, upw){
+        if(uid == '' || upw == ''){ //資料檢查
+            alert('請輸入每個項目！');
+            return;
+        }
+        var msg = "##"; //回傳訊息字串
+        msg = msg + uid + "/";
+        msg = msg + upw;
+        liff.sendMessages([
+            {
+                type: 'text',
+                text: msg
+            }
+        ])
+            .then(() => {
+                liff.closeWindow(); //關閉視窗
+            });      
+    }
 
+    $(document).ready(function(){
+        liff.init(function(data){   //初始化liff
+            initializeApp(data);
+        });
+        
+        $('#sure').click(function(e){
+            pushMsg($('#inputId').val(),$('#inputPassword').val());
+        });
+    });
+</script>
 <body class="text-center">
     <form class="form-signin">
         <!-- <img class="mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
@@ -28,7 +62,7 @@
       <input type="checkbox" value="remember-me"> Remember me
     </label> -->
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
+        <button id="sure" class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
         <!-- <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p> -->
     </form>
 </body>
