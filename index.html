@@ -39,13 +39,13 @@
             });      
     }
 
-    $(document).ready(function(){
-        liff.init(function(data){   //初始化liff
+    $(document).ready(function () {
+        liff.init(function (data) {   //初始化liff
             initializeApp(data);
         });
         
-        $('#sure').click(function(e){
-            pushMsg($('#inputId').val(),$('#inputPassword').val());
+        $('#sure').click(function (e) {
+            pushMsg($('#uid').val(),$('#upw').val());
         });
     });
 </script>
@@ -54,9 +54,9 @@
     <div class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal">登入</h1>
         <label for="inputId" class="sr-only">請輸入學號</label><br>
-        <input type="text" id="inputId" class="form-control" placeholder="請輸入學號" required autofocus>
+        <input type="text" id="uid" class="form-control" placeholder="請輸入學號" required autofocus>
         <label for="inputPassword" class="sr-only">請輸入密碼</label><br>
-        <input type="password" id="inputPassword" class="form-control" placeholder="請輸入密碼" required>
+        <input type="password" id="upw" class="form-control" placeholder="請輸入密碼" required>
         <div class="checkbox mb-3"><br>
             <button id="sure" class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
         </div>
