@@ -18,7 +18,8 @@
 </head>
 <script>
     function initializeApp(data){
-        var userid = data.context.userId; //取得ID
+        $('#userid').val(data.context.userId);
+        // var userid = data.context.userId; //取得ID
     }
     function pushMsg(uid, upw){
         if(uid == '' || upw == ''){ //資料檢查
@@ -28,25 +29,26 @@
         var msg = "##"; //回傳訊息字串
         msg = msg + uid + "/";
         msg = msg + upw;
+        
         liff.sendMessages([
             {
                 type: 'text',
                 text: msg
             }
         ])
-            .then(() => {
-                liff.closeWindow(); //關閉視窗
-            });      
-    }
+        .then(() => {
+            alert('done');
+            // liff.closeWindow(); //關閉視窗
+        });      
+    };
 
-    $(document).ready(function () {
+    $(function () {
         liff.init(function (data) {   //初始化liff
             initializeApp(data);
         });
         
         $('#sure').click(function (e) {
-            // pushMsg($('#uid').val(),$('#upw').val());
-            alert(msg);
+            pushMsg($('#uid').val(),$('#upw').val());
         });
     });
 </script>
@@ -54,13 +56,12 @@
 <body>
     <div class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal text-center">登入</h1>
-
+        <label>帳戶ID</label>
+        <input type="text" id="userid" class="form-control">
         <label for="uid" class="sr-only">請輸入學號</label><br>
         <input type="text" id="uid" class="form-control" placeholder="請輸入學號" required autofocus>
-
         <label for="upw" class="sr-only">請輸入密碼</label><br>
         <input type="password" id="upw" class="form-control" placeholder="請輸入密碼" required>
-
         <div class="checkbox mb-3"><br>
             <button id="sure" class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
         </div>
