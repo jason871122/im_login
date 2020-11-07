@@ -9,7 +9,7 @@
     <meta name="generator" content="Jekyll v4.1.1">
     <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-    <title>按鈕測試3</title>
+    <title>按鈕測試5</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -21,36 +21,44 @@
         $('#userid').val(data.context.userId);
         // var userid = data.context.userId; //取得ID
     }
-    function pushMsg(uid, upw){
-        if(uid == '' || upw == ''){ //資料檢查
-            alert('請輸入每個項目！');
-            return;
-        }
-        var msg = "##"; //回傳訊息字串
-        msg = msg + uid + "/";
-        msg = msg + upw;
-        
-        liff.sendMessages([
-            {
-                type: 'text',
-                text: $('#uid').val()
-            }
-        ])
-        .then(() => {
-            alert('done');
-            // liff.closeWindow(); //關閉視窗
-        });      
-    };
 
     $(function () {
         liff.init(function (data) {   //初始化liff
             initializeApp(data);
         });
-        
-        $('#sure').click(function (e) {
-            pushMsg($('#uid').val(),$('#upw').val());
-        });
     });
+
+    $('#sure').click(function () {
+        if($('#uid').val() == '' || $('#upw').val() == ''){
+            alert('請輸入每個項目！');
+        }
+        var msg = "##"
+        msg = msg + $('#uid').val() + "/";
+        msg = msg + $('#upw').val();
+        liff.sendMessages([{type: "text",text: msg}]).then(alert('done'))
+    });
+
+    // $('#sure').click(function () {
+    //     if(uid == '' || upw == ''){ //資料檢查
+    //         alert('請輸入每個項目！');
+    //         return;
+    //     }
+    //     var msg = "##"; //回傳訊息字串
+    //     msg = msg + uid + "/";
+    //     msg = msg + upw;
+    //     alert('done1');
+    //     liff.sendMessages([
+    //         {
+    //             type: 'text',
+    //             text: $('#uid').val()
+    //         }
+    //     ])
+    //     .then(() => {
+    //         alert('done2');
+    //         // liff.closeWindow(); //關閉視窗
+    //     });
+    //         pushMsg($('#uid').val(),$('#upw').val());
+    //     });
 </script>
 
 <body>
